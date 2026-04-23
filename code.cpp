@@ -122,23 +122,22 @@ struct LinkedList {
         
         Node* after_i_plus_x = i_plus_x_node->next;
         
+        // Break the list at the i-th node
+        i_node->next = nullptr;
+        
         // If we're moving to the end
         if (after_i_plus_x == nullptr) {
-            // Connect the end of the first i nodes to the beginning
-            i_node->next = head;
-            // Set the new head to the node after the first i nodes
-            head = after_i;
-            // Set the end of the moved part to null
-            i_plus_x_node->next = nullptr;
-        } else {
-            // Connect the end of the first i nodes to the beginning
-            i_node->next = head;
-            // Connect the end of the moved part to the rest of the list
+            // Connect the end of the moved part to the beginning
             i_plus_x_node->next = head;
             // Set the new head to the node after the first i nodes
             head = after_i;
-            // Set the end of the moved part to the rest of the list
-            i_plus_x_node->next = after_i_plus_x;
+        } else {
+            // Connect the end of the moved part to the beginning
+            i_plus_x_node->next = head;
+            // Connect the end of the first i nodes to the rest of the list
+            i_node->next = after_i_plus_x;
+            // Set the new head to the node after the first i nodes
+            head = after_i;
         }
     }
     
